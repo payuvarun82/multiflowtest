@@ -4150,7 +4150,7 @@
          * 
          * Examples:
          * - /crossborder     → Cross Border Payment
-         * - /nonseamless     → Non-Seamless Checkout
+         * - /payuhosted     → PayU-Hosted Checkout
          * - /subscription    → Subscription Payment
          * - /tpv             → TPV Payment
          * - /upiotm          → UPI OTM
@@ -4321,7 +4321,7 @@
             // Path-Based Routing: Read flow from URL pathname
             const pathname = window.location.pathname;
             const pathSegments = pathname.split('/').filter(segment => segment !== '');
-            const validFlows = ['crossborder', 'nonseamless', 'subscription', 'tpv', 'upiotm', 'preauth', 'checkoutplus', 'split', 'bankoffer'];
+            const validFlows = ['crossborder', 'payuhosted', 'subscription', 'tpv', 'upiotm', 'preauth', 'checkoutplus', 'split', 'bankoffer'];
             
             // Get flow name from path (last segment)
             const flowFromPath = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1].toLowerCase() : null;
@@ -4386,7 +4386,7 @@
                         <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; font-size: 0.9rem;">
                             <p style="margin: 0.5rem 0; opacity: 0.9; font-weight: 600;">Available Payment Flows:</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /crossborder</p>
-                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /nonseamless</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /payuhosted</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /subscription</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /tpv</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /upiotm</p>
