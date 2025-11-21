@@ -136,148 +136,7 @@
             z-index: 1;
         }
         
-        /* Landing Section - Hidden by default, shown only when no valid flow in URL */
-        .landing-section {
-            padding: 2rem 3rem 3rem 3rem;
-            text-align: center;
-            display: none; /* Hidden by default - shown by JavaScript if no flow in URL */
-        }
-        
-        .landing-section h2 {
-            font-size: 2rem;
-            color: var(--accent-primary);
-            margin-bottom: 1rem;
-        }
-        
-        .landing-section p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-        
-        .flow-selector {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .flow-selector label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-        
-        .flow-selector select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 1.1rem;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .flow-selector select:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(16, 132, 109, 0.1);
-        }
-        
-        .flow-selector button {
-            margin-top: 2rem;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 1rem 3rem;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .flow-selector button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-        
-        .flow-selector button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        /* Flow Links Grid */
-        .flow-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto 1rem auto;
-            padding: 1rem;
-        }
-        
-        .flow-link-card {
-            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .flow-link-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 0;
-        }
-        
-        .flow-link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-            border-color: var(--accent-primary);
-        }
-        
-        .flow-link-card:hover::before {
-            opacity: 0.05;
-        }
-        
-        .flow-link-card h3 {
-            font-size: 1.25rem;
-            color: var(--accent-primary);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .flow-link-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .flow-link-card:active {
-            transform: translateY(-2px);
-        }
+        /* Landing Section - Removed (Direct URL access only) */
         
         /* Flow Sections */
         .flow-content {
@@ -845,9 +704,6 @@
                 margin: 0;
             }
             
-            .flow-selector {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
         }
         
         /* Mobile Responsiveness */
@@ -868,9 +724,6 @@
                 font-size: 0.9rem;
             }
             
-            .landing-section {
-                padding: 1.5rem 1rem 2rem 1rem;
-            }
             
             .flow-content {
                 padding: 1rem 0.5rem;
@@ -916,24 +769,6 @@
                 gap: 0.75rem;
             }
             
-            .flow-selector {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .flow-links-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                padding: 0.5rem;
-            }
-            
-            .flow-link-card {
-                padding: 1.25rem;
-            }
-            
-            .flow-link-card h3 {
-                font-size: 1.1rem;
-            }
             
             .flow-card {
                 padding: 1.25rem;
@@ -1061,23 +896,6 @@
                 font-size: 0.85rem;
             }
             
-            .landing-section {
-                padding: 1.25rem 1rem 1.5rem 1rem;
-            }
-            
-            .flow-links-grid {
-                grid-template-columns: 1fr;
-                gap: 0.875rem;
-                padding: 0.5rem;
-            }
-            
-            .flow-link-card {
-                padding: 1rem;
-            }
-            
-            .flow-link-card h3 {
-                font-size: 1rem;
-            }
             
             .section {
                 padding: 0.875rem;
@@ -1540,70 +1358,7 @@
             <p>Complete Payment Testing Utility for Multiple Checkout Solutions On UAT</p>
         </div>
         
-        <!-- Landing Section -->
-        <div class="landing-section" id="landingSection">
-            <h2>🔗 Available Payment Flow Routes</h2>
-            <p>Click any card below to access the payment flow, or share these direct URLs with your team:</p>
-            
-            <!-- Direct Links Grid -->
-            <div class="flow-links-grid">
-                <a href="/crossborder" class="flow-link-card">
-                    <h3>🌍 Cross Border</h3>
-                    <p>International payment processing</p>
-                </a>
-                <a href="/nonseamless" class="flow-link-card">
-                    <h3>🛒 Non-Seamless</h3>
-                    <p>PreBuilt checkout page</p>
-                </a>
-                <a href="/subscription" class="flow-link-card">
-                    <h3>🔄 Subscription</h3>
-                    <p>Recurring payments</p>
-                </a>
-                <a href="/tpv" class="flow-link-card">
-                    <h3>✅ TPV</h3>
-                    <p>Third Party Verification</p>
-                </a>
-                <a href="/upiotm" class="flow-link-card">
-                    <h3>📱 UPI OTM</h3>
-                    <p>One Time Mandate</p>
-                </a>
-                <a href="/preauth" class="flow-link-card">
-                    <h3>💳 PreAuth</h3>
-                    <p>Card authorization flow</p>
-                </a>
-                <a href="/checkoutplus" class="flow-link-card">
-                    <h3>➕ Checkout Plus</h3>
-                    <p>Enhanced checkout SDK</p>
-                </a>
-                <a href="/split" class="flow-link-card">
-                    <h3>✂️ Split Payment</h3>
-                    <p>Amount/Percentage based</p>
-                </a>
-                <a href="/bankoffer" class="flow-link-card">
-                    <h3>🎁 Bank Offers</h3>
-                    <p>Discounts & cashback</p>
-                </a>
-            </div>
-            
-            <div style="margin: 2rem 0; color: var(--text-tertiary); font-size: 0.9rem;">OR</div>
-            
-            <div class="flow-selector">
-                <label for="flowSelect">Select from dropdown:</label>
-                <select id="flowSelect">
-                    <option value="">-- Select a flow --</option>
-                    <option value="crossborder">Cross Border Payment</option>
-                    <option value="nonseamless">Non-Seamless Checkout (PreBuilt)</option>
-                    <option value="subscription">Non-Seamless Subscription (Recurring)</option>
-                    <option value="tpv">TPV Payment (Third Party Verification)</option>
-                    <option value="upiotm">UPI OTM (One Time Mandate)</option>
-                    <option value="preauth">PreAuth Card Flow</option>
-                    <option value="checkoutplus">Checkout Plus</option>
-                    <option value="split">Split Payment (Amount/Percentage Based)</option>
-                    <option value="bankoffer">Bank Offers (Instant Discount/Cashback)</option>
-                </select>
-                <button onclick="loadSelectedFlow()">Continue</button>
-            </div>
-        </div>
+        <!-- Landing Section - Removed (Direct URL access only) -->
         
         <!-- Cross Border Flow -->
         <div class="flow-content" id="crossborderFlow">
@@ -4573,11 +4328,7 @@
                 console.log('Flow from URL:', flowFromURL);
                 console.log('Full pathname:', pathname);
                 
-                // Set the dropdown value
-                document.getElementById('flowSelect').value = flowFromURL;
-                
-                // Hide landing and show the flow from URL
-                document.getElementById('landingSection').style.display = 'none';
+                // Show the flow from URL
                 document.getElementById(flowFromURL + 'Flow').classList.add('active');
                 currentFlow = flowFromURL;
                 
@@ -4607,14 +4358,46 @@
                 
                 console.log('✓ Flow loaded from URL path successfully');
             } else {
-                // No valid flow in URL - show helpful landing page with all routes
+                // No valid flow in URL - show error message (no home page)
                 console.log('⚠️ No valid flow found in URL');
                 console.log('Current path:', pathname);
                 
-                // Show landing page with all available routes
-                document.getElementById('landingSection').style.display = 'block';
+                // Show error message for invalid URLs
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText = 'background: linear-gradient(135deg, #10846D 0%, #024538 100%); color: white; padding: 3rem; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;';
+                errorDiv.innerHTML = `
+                    <div style="max-width: 600px;">
+                        <h1 style="font-size: 3rem; margin-bottom: 1rem;">⚠️</h1>
+                        <h2 style="font-size: 2rem; margin-bottom: 1rem; font-weight: 600;">Invalid URL</h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                            Please use a valid payment flow URL to access this application.
+                        </p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                            <p style="font-size: 0.95rem; margin-bottom: 1rem; opacity: 0.9;">Valid URL format:</p>
+                            <code style="background: rgba(0,0,0,0.3); padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; display: inline-block;">
+                                https://multiflowtestt.onrender.com/<strong style="color: #72eed5;">[flow-name]</strong>
+                            </code>
+                        </div>
+                        <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; font-size: 0.9rem;">
+                            <p style="margin-bottom: 0.5rem; font-weight: 600;">Available flows:</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /crossborder</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /nonseamless</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /subscription</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /tpv</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /upiotm</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /preauth</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /checkoutplus</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /split</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /bankoffer</p>
+                        </div>
+                    </div>
+                `;
+                document.body.insertBefore(errorDiv, document.body.firstChild);
                 
-                console.log('ℹ️ Showing landing page with all available routes');
+                // Hide the header and container since we're showing error page
+                document.querySelector('.container').style.display = 'none';
+                
+                console.error('✗ Invalid flow URL. Valid flows:', validFlows);
             }
             
             // Initialize character counters for all fields with maxlength
@@ -5729,164 +5512,7 @@
             });
         }
         
-        // Navigation Functions
-        function loadSelectedFlow() {
-            const flowSelect = document.getElementById('flowSelect');
-            const selectedFlow = flowSelect.value;
-            
-            if (!selectedFlow) {
-                alert('Please select a payment flow');
-                return;
-            }
-            
-            // Update URL using pushState for path-based routing
-            const newPath = '/' + selectedFlow;
-            window.history.pushState({flow: selectedFlow}, '', newPath);
-            console.log('✓ URL updated to:', newPath);
-            
-            // If switching from a different flow, reset the new flow's fields
-            if (currentFlow && currentFlow !== selectedFlow) {
-                resetFormFields(selectedFlow);
-                
-                // Reset UDF fields for the new flow
-                if (selectedFlow === 'nonseamless') {
-                    document.getElementById('ns_udf1').value = '';
-                    document.getElementById('ns_udf2').value = '';
-                    document.getElementById('ns_udf3').value = '';
-                    document.getElementById('ns_udf4').value = '';
-                    document.getElementById('ns_udf5').value = '';
-                } else if (selectedFlow === 'crossborder') {
-                    // Reset to one-time by default
-                    currentPaymentType = 'onetime';
-                    document.getElementById('cb-onetime-btn').classList.add('active');
-                    document.getElementById('cb-subscription-btn').classList.remove('active');
-                    document.getElementById('cb-subscription-config').classList.remove('active');
-                    document.getElementById('cb-onetime-udf-section').classList.remove('hidden');
-                    document.getElementById('cb-subscription-udf-section').classList.add('hidden');
-                    
-                    // Reset one-time UDF fields
-                    document.getElementById('cb_udf1_input').value = '';
-                    document.getElementById('cb_udf2_input').value = '';
-                    document.getElementById('cb_udf3_input').value = '';
-                    document.getElementById('cb_udf4_input').value = '';
-                    document.getElementById('cb_udf5_input').value = '';
-                    
-                    // Initialize subscription fields with default values (current date and interval=1)
-                    const today = new Date().toISOString().split('T')[0];
-                    document.getElementById('cb_billing_cycle').value = 'MONTHLY';
-                    document.getElementById('cb_billing_interval').value = '1';
-                    document.getElementById('cb_payment_start_date').value = today;
-                    document.getElementById('cb_payment_end_date').value = '';
-                    
-                    // Initialize SI and API version (prefilled fields for subscription)
-                    document.getElementById('cb_si').value = '1';
-                    document.getElementById('cb_api_version').value = '7';
-                    
-                    console.log('Cross Border flow loaded - subscription fields initialized with defaults');
-                    
-                    // Reset subscription UDF fields
-                    document.getElementById('cb_sub_udf1_input').value = '';
-                    document.getElementById('cb_sub_udf2_input').value = '';
-                    document.getElementById('cb_sub_udf3_input').value = '';
-                    document.getElementById('cb_sub_udf4_input').value = '';
-                    document.getElementById('cb_sub_udf5_input').value = '';
-                } else if (selectedFlow === 'subscription') {
-                    // Reset subscription fields
-                    document.getElementById('sub_billing_cycle').value = 'MONTHLY';
-                    document.getElementById('sub_billing_interval').value = '1';
-                    document.getElementById('sub_payment_start_date').value = new Date().toISOString().split('T')[0];
-                    document.getElementById('sub_payment_end_date').value = '';
-                    
-                    document.getElementById('sub_udf1').value = '';
-                    document.getElementById('sub_udf2').value = '';
-                    document.getElementById('sub_udf3').value = '';
-                    document.getElementById('sub_udf4').value = '';
-                    document.getElementById('sub_udf5').value = '';
-                } else if (selectedFlow === 'tpv') {
-                    // Reset TPV UDF fields
-                    document.getElementById('tpv_udf1').value = '';
-                    document.getElementById('tpv_udf2').value = '';
-                    document.getElementById('tpv_udf3').value = '';
-                    document.getElementById('tpv_udf4').value = '';
-                    document.getElementById('tpv_udf5').value = '';
-                } else if (selectedFlow === 'upiotm') {
-                    // Reset UPI OTM date fields and UDFs
-                    const today = new Date().toISOString().split('T')[0];
-                    const endDate = new Date();
-                    endDate.setDate(endDate.getDate() + 7);
-                    document.getElementById('upi_payment_start_date').value = today;
-                    document.getElementById('upi_payment_end_date').value = endDate.toISOString().split('T')[0];
-                    
-                    document.getElementById('upi_udf1').value = '';
-                    document.getElementById('upi_udf2').value = '';
-                    document.getElementById('upi_udf3').value = '';
-                    document.getElementById('upi_udf4').value = '';
-                    document.getElementById('upi_udf5').value = '';
-                } else if (selectedFlow === 'preauth') {
-                    // Reset PreAuth UDF fields
-                    document.getElementById('preauth_udf1').value = '';
-                    document.getElementById('preauth_udf2').value = '';
-                    document.getElementById('preauth_udf3').value = '';
-                    document.getElementById('preauth_udf4').value = '';
-                    document.getElementById('preauth_udf5').value = '';
-                } else if (selectedFlow === 'checkoutplus') {
-                    // Reset Checkout Plus UDF fields
-                    document.getElementById('cp_udf1').value = '';
-                    document.getElementById('cp_udf2').value = '';
-                    document.getElementById('cp_udf3').value = '';
-                    document.getElementById('cp_udf4').value = '';
-                    document.getElementById('cp_udf5').value = '';
-                } else if (selectedFlow === 'bankoffer') {
-                    // Reset Bank Offer UDF fields
-                    document.getElementById('bo_udf1').value = '';
-                    document.getElementById('bo_udf2').value = '';
-                    document.getElementById('bo_udf3').value = '';
-                    document.getElementById('bo_udf4').value = '';
-                    document.getElementById('bo_udf5').value = '';
-                    // Reset offer_key
-                    document.getElementById('bo_offer_key').value = '';
-                    // Reset SKU configuration
-                    document.getElementById('bo_enable_sku').checked = false;
-                    document.getElementById('bo-sku-config').style.display = 'none';
-                    document.getElementById('bo-custom-sku-builder').style.display = 'none';
-                    document.getElementById('boSkuRowsContainer').innerHTML = '';
-                    boSkuRowCounter = 0;
-                    // Uncheck all scenario radios
-                    const scenarioRadios = document.querySelectorAll('input[name="bo_sku_scenario"]');
-                    scenarioRadios.forEach(radio => radio.checked = false);
-                    // Clear JSON preview
-                    document.getElementById('bo-json-preview').textContent = '';
-                }
-            }
-            
-            currentFlow = selectedFlow;
-            
-            // Hide landing section
-            document.getElementById('landingSection').style.display = 'none';
-            
-            // Show selected flow
-            document.getElementById(selectedFlow + 'Flow').classList.add('active');
-            
-            // Transaction ID already generated on page load - keeping it stable
-            console.log('✓ Using stable transaction ID for ' + selectedFlow + ' flow');
-            
-            // Initialize split flow with a default row
-            if (selectedFlow === 'split') {
-                // Clear any existing rows
-                document.getElementById('splitRowsContainer').innerHTML = '';
-                splitRowCounter = 0;
-                // Add one default split row
-                addSplitRow();
-                console.log('✓ Split flow initialized with default row');
-            }
-            
-            // Save current flow to localStorage for persistence on refresh
-            localStorage.setItem('currentPaymentFlow', selectedFlow);
-            if (selectedFlow === 'crossborder') {
-                localStorage.setItem('currentPaymentType', currentPaymentType);
-            }
-            console.log('✓ Flow saved to localStorage:', selectedFlow);
-        }
+        // Navigation Functions - Dropdown removed, using URL-based routing only
         
         function backToLanding() {
             // Since there's no landing page, use browser back navigation
