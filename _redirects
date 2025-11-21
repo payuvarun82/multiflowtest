@@ -1,0 +1,11 @@
+# Render Redirects Configuration
+# This file enables client-side routing for the PayU Payment Integration Hub
+# All routes are redirected to the main HTML file which handles the routing
+
+# Redirect all paths to index.html with 200 status (SPA mode)
+# This allows URLs like /crossborder, /subscription, etc. to work
+/*    /payu_multiflow_original_design4.html    200
+
+# Alternative: If you rename the file to index.html, use this instead:
+# /*    /index.html    200
+
