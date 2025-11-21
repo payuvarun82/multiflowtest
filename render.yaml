@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: payu-payment-hub
+    env: static
+    buildCommand: echo "No build required - static site"
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /payu_multiflow_original_design4.html
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    envVars: []
+
