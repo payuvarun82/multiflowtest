@@ -136,11 +136,11 @@
             z-index: 1;
         }
         
-        /* Landing Section - Hidden by default (no home page requirement) */
+        /* Landing Section - Hidden by default, shown only when no valid flow in URL */
         .landing-section {
             padding: 2rem 3rem 3rem 3rem;
             text-align: center;
-            display: none; /* Hidden - users access flows directly via URL */
+            display: none; /* Hidden by default - shown by JavaScript if no flow in URL */
         }
         
         .landing-section h2 {
@@ -1542,44 +1542,44 @@
         
         <!-- Landing Section -->
         <div class="landing-section" id="landingSection">
-            <h2>Select Payment Flow</h2>
-            <p>Choose the payment integration flow you want to test. Click on any card below or use direct links:</p>
+            <h2>🔗 Available Payment Flow Routes</h2>
+            <p>Click any card below to access the payment flow, or share these direct URLs with your team:</p>
             
             <!-- Direct Links Grid -->
             <div class="flow-links-grid">
-                <a href="#/crossborder" class="flow-link-card">
+                <a href="/crossborder" class="flow-link-card">
                     <h3>🌍 Cross Border</h3>
                     <p>International payment processing</p>
                 </a>
-                <a href="#/nonseamless" class="flow-link-card">
+                <a href="/nonseamless" class="flow-link-card">
                     <h3>🛒 Non-Seamless</h3>
                     <p>PreBuilt checkout page</p>
                 </a>
-                <a href="#/subscription" class="flow-link-card">
+                <a href="/subscription" class="flow-link-card">
                     <h3>🔄 Subscription</h3>
                     <p>Recurring payments</p>
                 </a>
-                <a href="#/tpv" class="flow-link-card">
+                <a href="/tpv" class="flow-link-card">
                     <h3>✅ TPV</h3>
                     <p>Third Party Verification</p>
                 </a>
-                <a href="#/upiotm" class="flow-link-card">
+                <a href="/upiotm" class="flow-link-card">
                     <h3>📱 UPI OTM</h3>
                     <p>One Time Mandate</p>
                 </a>
-                <a href="#/preauth" class="flow-link-card">
+                <a href="/preauth" class="flow-link-card">
                     <h3>💳 PreAuth</h3>
                     <p>Card authorization flow</p>
                 </a>
-                <a href="#/checkoutplus" class="flow-link-card">
+                <a href="/checkoutplus" class="flow-link-card">
                     <h3>➕ Checkout Plus</h3>
                     <p>Enhanced checkout SDK</p>
                 </a>
-                <a href="#/split" class="flow-link-card">
+                <a href="/split" class="flow-link-card">
                     <h3>✂️ Split Payment</h3>
                     <p>Amount/Percentage based</p>
                 </a>
-                <a href="#/bankoffer" class="flow-link-card">
+                <a href="/bankoffer" class="flow-link-card">
                     <h3>🎁 Bank Offers</h3>
                     <p>Discounts & cashback</p>
                 </a>
@@ -4607,22 +4607,14 @@
                 
                 console.log('✓ Flow loaded from URL path successfully');
             } else {
-                // No valid flow in URL - show error or redirect
+                // No valid flow in URL - show helpful landing page with all routes
                 console.log('⚠️ No valid flow found in URL');
                 console.log('Current path:', pathname);
                 
-                // Hide landing page (as per requirement - no home page)
-                document.getElementById('landingSection').style.display = 'none';
+                // Show landing page with all available routes
+                document.getElementById('landingSection').style.display = 'block';
                 
-                // Show error message
-                document.body.insertAdjacentHTML('afterbegin', 
-                    '<div style="background: #f56565; color: white; padding: 2rem; text-align: center; font-size: 1.2rem; font-weight: 600;">' +
-                    '⚠️ Invalid URL: No payment flow specified<br><br>' +
-                    '<span style="font-size: 0.9rem; font-weight: normal;">Please use a valid flow URL like: /crossborder, /subscription, etc.</span>' +
-                    '</div>'
-                );
-                
-                console.error('✗ Invalid flow URL. Valid flows:', validFlows);
+                console.log('ℹ️ Showing landing page with all available routes');
             }
             
             // Initialize character counters for all fields with maxlength
