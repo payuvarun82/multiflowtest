@@ -3,11 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PayU UAT Payment Integration Hub</title>
+    <title>PayU CodeGen</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script id="checkoutPlusScript" src="https://jssdk-uat.payu.in/bolt/bolt.min.js"></script>
     <style>
         :root {
+            /* PayU Font Variables - Developer Agnostic */
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+            --font-weight-bold: 700;
+            
+            /* PayU Color Variables */
+            --color-text-default: #1a202c;
+            --color-bg-page: #F7FAF9;
+            --gray100: #f5f5f5;
+            
+            /* PayU Markdown Variables */
+            --markdown-font: var(--font-family);
+            --markdown-font-size: 15px;
+            --markdown-line-height: 1.5;
+            --markdown-title-font: var(--font-family);
+            --markdown-title-weight: var(--font-weight-bold);
+            
+            /* PayU Table Variables */
+            --table-edges: #e5e5e5;
+            --table-head: var(--gray100);
+            --table-head-text: var(--color-text-default);
+            --table-stripe: var(--gray100);
+            --table-text: var(--color-text-default);
+            --table-row: var(--color-bg-page);
+            
             /* PayU Theme Colors */
             --color-primary: #10846D;
             --color-primary-inverse: #fff;
@@ -61,11 +86,12 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #F7FAF9;
+            color: var(--color-text-default);
+            font-family: var(--font-family);
+            font-weight: 400;
+            line-height: 1.5;
+            background: var(--color-bg-page);
             padding: 20px;
-            color: var(--text-primary);
-            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -136,8 +162,6 @@
             z-index: 1;
         }
         
-        /* Landing Section - Removed (Direct URL access only) */
-        
         /* Flow Sections */
         .flow-content {
             display: none;
@@ -145,25 +169,6 @@
         
         .flow-content.active {
             display: block;
-        }
-        
-        .back-button {
-            margin: 2rem 3rem 0;
-            padding: 0.75rem 1.5rem;
-            background: var(--color-primary-darken-20);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .back-button:hover {
-            background: var(--color-primary-darken-10);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(16, 132, 109, 0.3);
         }
         
         .main-content {
@@ -612,7 +617,7 @@
         }
         
         .hash-string-display {
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-family-mono);
             background: var(--bg-tertiary);
             padding: 1rem;
             border-radius: 8px;
@@ -654,7 +659,7 @@
         }
         
         .curl-content {
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-family-mono);
             background: rgba(0, 0, 0, 0.3);
             padding: 1rem;
             border-radius: 8px;
@@ -704,6 +709,9 @@
                 margin: 0;
             }
             
+            .flow-selector {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
         }
         
         /* Mobile Responsiveness */
@@ -723,7 +731,6 @@
             .header p {
                 font-size: 0.9rem;
             }
-            
             
             .flow-content {
                 padding: 1rem 0.5rem;
@@ -769,6 +776,10 @@
                 gap: 0.75rem;
             }
             
+            .flow-selector {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
             
             .flow-card {
                 padding: 1.25rem;
@@ -895,7 +906,6 @@
             .header p {
                 font-size: 0.85rem;
             }
-            
             
             .section {
                 padding: 0.875rem;
@@ -1083,7 +1093,7 @@
             padding: 24px;
             border-radius: 12px;
             overflow-x: auto;
-            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            font-family: var(--font-family-mono);
             font-size: 13px;
             line-height: 1.6;
             max-height: 500px;
@@ -1137,7 +1147,7 @@
             background: #fff;
             padding: 2px 6px;
             border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            font-family: var(--font-family-mono);
             color: #e83e8c;
             border: 1px solid #ffc107;
         }
@@ -1354,15 +1364,12 @@
                     <path class="cls-2" d="M362.18,97.77h26.07v53.73c0,15.03,7.1,22.55,21.32,22.55s21.32-7.51,21.32-22.55v-53.73h26.07v56.37c0,13.15-4.05,23.46-12.15,30.91-8.1,7.46-19.85,11.19-35.23,11.19s-27.13-3.76-35.23-11.27c-8.1-7.52-12.16-17.79-12.16-30.83v-56.37Z"/>
                 </svg>
             </div>
-            <h1>PayU UAT Payment Integration Hub</h1>
-            <p>Complete Payment Testing Utility for Multiple Checkout Solutions On UAT</p>
+            <h1>PayU CodeGen</h1>
+            <p>Payment Code Generation Utility for PayU Hosted Checkout Solutions</p>
         </div>
-        
-        <!-- Landing Section - Removed (Direct URL access only) -->
         
         <!-- Cross Border Flow -->
         <div class="flow-content" id="crossborderFlow">
-            <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
             
             <div class="main-content">
                 <!-- Configuration Settings -->
@@ -1741,7 +1748,6 @@
         
         <!-- Non-Seamless Checkout Flow -->
         <div class="flow-content" id="nonseamlessFlow">
-            <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
             
             <div class="main-content">
                 <!-- Configuration Settings -->
@@ -1983,7 +1989,6 @@
         
         <!-- Subscription Flow -->
         <div class="flow-content" id="subscriptionFlow">
-            <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
             
             <div class="main-content">
                 <!-- Configuration Settings -->
@@ -2902,7 +2907,7 @@
                 <h2 class="section-title">Configuration Settings</h2>
                 
                 <div class="alert alert-info">
-                    <strong>Pre-Authorization Payment:</strong> Amount will be blocked on customer's card but not captured immediately. Only Credit and Debit Cards are supported for this flow.
+                    <strong>Pre-Authorization Payment:</strong> Amount will be blocked on customer's card but not captured immediately.
                 </div>
                 
                 <!-- Custom Key/Salt Toggle -->
@@ -4375,11 +4380,11 @@
                         <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
                             <p style="font-size: 0.95rem; margin-bottom: 1rem; opacity: 0.9;">Valid URL format:</p>
                             <code style="background: rgba(0,0,0,0.3); padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; display: inline-block;">
-                                https://multiflowtestt.onrender.com/<strong style="color: #72eed5;">[flow-name]</strong>
+                                https://your-domain.com/<strong style="color: #72eed5;">[flow-name]</strong>
                             </code>
                         </div>
                         <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; font-size: 0.9rem;">
-                            <p style="margin-bottom: 0.5rem; font-weight: 600;">Available flows:</p>
+                            <p style="margin: 0.5rem 0; opacity: 0.9; font-weight: 600;">Available Payment Flows:</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /crossborder</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /nonseamless</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /subscription</p>
@@ -4395,7 +4400,10 @@
                 document.body.insertBefore(errorDiv, document.body.firstChild);
                 
                 // Hide the header and container since we're showing error page
-                document.querySelector('.container').style.display = 'none';
+                const container = document.querySelector('.container');
+                if (container) {
+                    container.style.display = 'none';
+                }
                 
                 console.error('✗ Invalid flow URL. Valid flows:', validFlows);
             }
@@ -4405,12 +4413,6 @@
             
             // Initialize transaction ID field listeners (for custom credentials mode)
             initializeTxnidListeners();
-        });
-        
-        // Listen for popstate (browser back/forward button with path-based routing)
-        window.addEventListener('popstate', function(event) {
-            console.log('📍 Browser navigation detected, reloading page for new transaction ID');
-            window.location.reload(); // Reload to get fresh transaction IDs
         });
         
         // Character Counter Functions
@@ -5512,30 +5514,7 @@
             });
         }
         
-        // Navigation Functions - Dropdown removed, using URL-based routing only
-        
-        function backToLanding() {
-            // Since there's no landing page, use browser back navigation
-            console.log('📍 Navigating back using browser history');
-            
-            // Hide debug sections before going back
-            hideDebugAndCurl('crossborder');
-            hideDebugAndCurl('nonseamless');
-            hideDebugAndCurl('subscription');
-            hideDebugAndCurl('tpv');
-            hideDebugAndCurl('upiotm');
-            hideDebugAndCurl('preauth');
-            hideDebugAndCurl('checkoutplus');
-            hideDebugAndCurl('split');
-            hideDebugAndCurl('bankoffer');
-            
-            // Clear localStorage
-            localStorage.removeItem('currentPaymentFlow');
-            localStorage.removeItem('currentPaymentType');
-            
-            // Go back in browser history
-            window.history.back();
-        }
+        // Navigation Functions
         
         // Transaction ID Generation
         function generateTransactionId(flow) {
@@ -9832,8 +9811,5 @@ nodeCartDetailsUsage +
     </div>
 </body>
 </html>
-
-
-
 
 
