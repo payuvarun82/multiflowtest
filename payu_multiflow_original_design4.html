@@ -162,6 +162,79 @@
             z-index: 1;
         }
         
+        /* Landing Section */
+        .landing-section {
+            padding: 2rem 3rem 3rem 3rem;
+            text-align: center;
+        }
+        
+        .landing-section h2 {
+            font-size: 2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .landing-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .flow-selector {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .flow-selector label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .flow-selector select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .flow-selector select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(16, 132, 109, 0.1);
+        }
+        
+        .flow-selector button {
+            margin-top: 2rem;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .flow-selector button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .flow-selector button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
         /* Flow Sections */
         .flow-content {
             display: none;
@@ -169,6 +242,25 @@
         
         .flow-content.active {
             display: block;
+        }
+        
+        .back-button {
+            margin: 2rem 3rem 0;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-primary-darken-20);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: var(--color-primary-darken-10);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 132, 109, 0.3);
         }
         
         .main-content {
@@ -732,6 +824,10 @@
                 font-size: 0.9rem;
             }
             
+            .landing-section {
+                padding: 1.5rem 1rem 2rem 1rem;
+            }
+            
             .flow-content {
                 padding: 1rem 0.5rem;
             }
@@ -905,6 +1001,10 @@
             
             .header p {
                 font-size: 0.85rem;
+            }
+            
+            .landing-section {
+                padding: 1.25rem 1rem 1.5rem 1rem;
             }
             
             .section {
@@ -1368,8 +1468,32 @@
             <p>Payment Code Generation Utility for PayU Hosted Checkout Solutions</p>
         </div>
         
+        <!-- Landing Section -->
+        <div class="landing-section" id="landingSection">
+            <h2>Select Payment Flow</h2>
+            <p>Choose the payment integration flow you want to test</p>
+            
+            <div class="flow-selector">
+                <label for="flowSelect">Payment Flow:</label>
+                <select id="flowSelect">
+                    <option value="">-- Select a flow --</option>
+                    <option value="crossborder">PayU Hosted Cross Border Payment Flow</option>
+                    <option value="nonseamless">PayU Hosted Checkout Flow</option>
+                    <option value="subscription">PayU Hosted Checkout Subscription Flow</option>
+                    <option value="tpv">PayU Hosted Checkout TPV Flow</option>
+                    <option value="upiotm">PayU Hosted Checkout UPI OTM Flow</option>
+                    <option value="preauth">PayU Hosted Checkout PreAuth Flow</option>
+                    <option value="checkoutplus">Checkout Plus</option>
+                    <option value="split">PayU Hosted Checkout Split Payment Flow</option>
+                    <option value="bankoffer">PayU Hosted Checkout Bank Offer Flow</option>
+                </select>
+                <button onclick="loadSelectedFlow()">Continue</button>
+            </div>
+        </div>
+        
         <!-- Cross Border Flow -->
         <div class="flow-content" id="crossborderFlow">
+            <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
             
             <div class="main-content">
                 <!-- Configuration Settings -->
@@ -1450,7 +1574,7 @@
                             <div class="form-group">
                                 <label for="cb_payment_start_date">Payment Start Date <span class="required">*</span></label>
                                 <input type="date" id="cb_payment_start_date" name="payment_start_date" onchange="validateSubscriptionStartDate('crossborder')">
-                                <small style="color: var(--text-tertiary); display: block; margin-top: 0.25rem;">Select current or future date only</small>
+                                <small style="color: var(--text-tertiary); display: block; margin-top: 0.25rem;">Select today's date or future dates only. Note: For eNACH payments, select tomorrow's date.</small>
                             </div>
                             <div class="form-group">
                                 <label for="cb_payment_end_date">Payment End Date <span class="required">*</span></label>
@@ -1523,6 +1647,7 @@
                         <div class="form-group">
                             <label for="cb_amount">Amount <span class="required">*</span></label>
                             <input type="number" id="cb_amount" name="amount" step="0.01" placeholder="100.00" required>
+                            <small id="cb_enach_amount_note" style="color: var(--text-tertiary); display: none; margin-top: 0.25rem;">Note: For eNACH payments, use transaction amount as 1.</small>
                         </div>
                         <div class="form-group">
                             <label for="cb_productinfo">Product Info <span class="required">*</span></label>
@@ -1747,7 +1872,8 @@
         </div>
         
         <!-- Non-Seamless Checkout Flow -->
-        <div class="flow-content" id="payuhostedFlow">
+        <div class="flow-content" id="nonseamlessFlow">
+            <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
             
             <div class="main-content">
                 <!-- Configuration Settings -->
@@ -1761,7 +1887,7 @@
                     <!-- Custom Key/Salt Toggle -->
                     <div class="custom-key-toggle">
                         <label>
-                            <input type="checkbox" id="ns_use_custom_keys" onchange="toggleCustomKeys('payuhosted')">
+                            <input type="checkbox" id="ns_use_custom_keys" onchange="toggleCustomKeys('nonseamless')">
                             Use Your Merchant UAT Key & Salt (for testing with test/sandbox credentials provided by PayU payments)
                         </label>
                         <div class="custom-key-fields" id="ns-custom-key-fields">
@@ -1773,7 +1899,7 @@
                                 <label for="ns_custom_salt">Custom Merchant Salt <span class="required">*</span></label>
                                 <div style="position: relative;">
                                     <input type="password" id="ns_custom_salt" name="custom_salt" placeholder="Enter your PayU Merchant Salt" style="padding-right: 40px;">
-                                    <button type="button" onclick="toggleSaltVisibility('payuhosted')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 12px; color: #666;" title="Show/Hide Salt">Show</button>
+                                    <button type="button" onclick="toggleSaltVisibility('nonseamless')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 12px; color: #666;" title="Show/Hide Salt">Show</button>
                                 </div>
                             </div>
                         </div>
@@ -1815,7 +1941,7 @@
                     
                     <!-- Fill with Sample Data Button (for Predefined Credentials) -->
                     <div class="form-group" id="ns-generate-template-wrapper" style="margin-top: 0.5rem; margin-bottom: 1rem;">
-                        <button type="button" class="button template-button" id="ns_generate_template_btn" onclick="generateTemplate('payuhosted')" style="font-size: 0.9rem; padding: 0.75rem 1.5rem;">
+                        <button type="button" class="button template-button" id="ns_generate_template_btn" onclick="generateTemplate('nonseamless')" style="font-size: 0.9rem; padding: 0.75rem 1.5rem;">
                             🔄 Fill with Sample Data
                         </button>
                         <small style="color: var(--text-tertiary); display: block; margin-top: 0.5rem;">Fill all form fields with predefined test data</small>
@@ -1964,12 +2090,12 @@
                 
                 <!-- Action Buttons -->
                 <div class="pay-button-wrapper">
-                    <button type="button" class="button debug-button" onclick="showDebugInfo('payuhosted')">Show Debug Info</button>
-                    <button type="button" class="button debug-button" onclick="showCurlCommand('payuhosted')">Generate CURL</button>
-                    <button type="button" class="button code-gen-button" onclick="showCodeGeneratorModal('payuhosted')">
+                    <button type="button" class="button debug-button" onclick="showDebugInfo('nonseamless')">Show Debug Info</button>
+                    <button type="button" class="button debug-button" onclick="showCurlCommand('nonseamless')">Generate CURL</button>
+                    <button type="button" class="button code-gen-button" onclick="showCodeGeneratorModal('nonseamless')">
                         <span style="margin-right: 5px;">&#128187;</span> Generate Code
                     </button>
-                    <button type="button" class="button" onclick="submitPayment('payuhosted')">Pay Now</button>
+                    <button type="button" class="button" onclick="submitPayment('nonseamless')">Pay Now</button>
                 </div>
             </div>
             
@@ -1982,13 +2108,14 @@
             <!-- CURL Section -->
             <div class="curl-section" id="ns-curlSection">
                 <h3>CURL Command</h3>
-                <button class="copy-button" onclick="copyCurlToClipboard('payuhosted')">Copy to Clipboard</button>
+                <button class="copy-button" onclick="copyCurlToClipboard('nonseamless')">Copy to Clipboard</button>
                 <div class="curl-content" id="ns-curlContent"></div>
             </div>
         </div>
         
         <!-- Subscription Flow -->
         <div class="flow-content" id="subscriptionFlow">
+            <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
             
             <div class="main-content">
                 <!-- Configuration Settings -->
@@ -2054,7 +2181,7 @@
                             <div class="form-group">
                                 <label for="sub_payment_start_date">Payment Start Date <span class="required">*</span></label>
                                 <input type="date" id="sub_payment_start_date" name="payment_start_date" onchange="validateSubscriptionStartDate('subscription')">
-                                <small style="color: var(--text-tertiary); display: block; margin-top: 0.25rem;">Select current or future date only</small>
+                                <small style="color: var(--text-tertiary); display: block; margin-top: 0.25rem;">Select today's date or future dates only. Note: For eNACH payments, select tomorrow's date.</small>
                             </div>
                             <div class="form-group">
                                 <label for="sub_payment_end_date">Payment End Date <span class="required">*</span></label>
@@ -2123,6 +2250,7 @@
                         <div class="form-group">
                             <label for="sub_amount">Amount <span class="required">*</span></label>
                             <input type="number" id="sub_amount" name="amount" step="0.01" placeholder="100.00" required>
+                            <small style="color: var(--text-tertiary); display: block; margin-top: 0.25rem;">Note: For eNACH payments, use transaction amount as 1.</small>
                         </div>
                         <div class="form-group">
                             <label for="sub_productinfo">Product Info <span class="required">*</span></label>
@@ -2369,6 +2497,7 @@
     
     <!-- TPV Flow (One Time) -->
     <div class="flow-content" id="tpvFlow">
+        <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
         
         <div class="main-content">
             <!-- Configuration Settings -->
@@ -2644,6 +2773,7 @@
     
     <!-- UPI OTM Flow -->
     <div class="flow-content" id="upiotmFlow">
+        <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
         
         <div class="main-content">
             <!-- Configuration Settings -->
@@ -2900,6 +3030,7 @@
     
     <!-- PreAuth Card Flow -->
     <div class="flow-content" id="preauthFlow">
+        <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
         
         <div class="main-content">
             <!-- Configuration Settings -->
@@ -3162,6 +3293,7 @@
     
     <!-- Checkout Plus Flow -->
     <div class="flow-content" id="checkoutplusFlow">
+        <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
         
         <div class="main-content">
             <!-- Configuration Settings -->
@@ -3403,6 +3535,7 @@
     
     <!-- Split Payment Flow -->
     <div class="flow-content" id="splitFlow">
+        <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
         
         <div class="main-content">
             <!-- Configuration Settings -->
@@ -3705,6 +3838,7 @@
     
     <!-- Bank Offers Flow -->
     <div class="flow-content" id="bankofferFlow">
+        <button class="back-button" onclick="backToLanding()">Back to Flow Selection</button>
         
         <div class="main-content">
             <!-- Configuration Settings -->
@@ -4147,7 +4281,7 @@
          * 
          * Examples:
          * - /crossborder     → Cross Border Payment
-         * - /payuhosted      → PayU Hosted Checkout
+         * - /nonseamless     → PayU Hosted Checkout
          * - /subscription    → Subscription Payment
          * - /tpv             → TPV Payment
          * - /upiotm          → UPI OTM
@@ -4183,7 +4317,7 @@
             
             // Initialize transaction IDs for all flows
             generateTransactionId('crossborder');
-            generateTransactionId('payuhosted');
+            generateTransactionId('nonseamless');
             generateTransactionId('subscription');
             generateTransactionId('tpv');
             generateTransactionId('upiotm');
@@ -4193,7 +4327,7 @@
             generateTransactionId('bankoffer');
             
             // Initialize Fill with Sample Data button visibility based on custom keys state
-            const flows = ['crossborder', 'payuhosted', 'subscription', 'tpv', 'upiotm', 'preauth', 'checkoutplus', 'split', 'bankoffer'];
+            const flows = ['crossborder', 'nonseamless', 'subscription', 'tpv', 'upiotm', 'preauth', 'checkoutplus', 'split', 'bankoffer'];
             flows.forEach(function(flow) {
                 const prefix = flow === 'crossborder' ? 'cb' : (flow === 'subscription' ? 'sub' : (flow === 'tpv' ? 'tpv' : (flow === 'upiotm' ? 'upi' : (flow === 'preauth' ? 'preauth' : (flow === 'checkoutplus' ? 'cp' : (flow === 'split' ? 'split' : (flow === 'bankoffer' ? 'bo' : 'ns')))))));
                 const customKeysCheckbox = document.getElementById(prefix + '_use_custom_keys');
@@ -4318,7 +4452,7 @@
             // Path-Based Routing: Read flow from URL pathname
             const pathname = window.location.pathname;
             const pathSegments = pathname.split('/').filter(segment => segment !== '');
-            const validFlows = ['crossborder', 'payuhosted', 'subscription', 'tpv', 'upiotm', 'preauth', 'checkoutplus', 'split', 'bankoffer'];
+            const validFlows = ['crossborder', 'nonseamless', 'subscription', 'tpv', 'upiotm', 'preauth', 'checkoutplus', 'split', 'bankoffer'];
             
             // Get flow name from path (last segment)
             const flowFromPath = pathSegments.length > 0 ? pathSegments[pathSegments.length - 1].toLowerCase() : null;
@@ -4383,7 +4517,7 @@
                         <div style="text-align: left; background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 12px; font-size: 0.9rem;">
                             <p style="margin: 0.5rem 0; opacity: 0.9; font-weight: 600;">Available Payment Flows:</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /crossborder</p>
-                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /payuhosted</p>
+                            <p style="margin: 0.25rem 0; opacity: 0.8;">• /nonseamless</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /subscription</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /tpv</p>
                             <p style="margin: 0.25rem 0; opacity: 0.8;">• /upiotm</p>
@@ -4570,10 +4704,10 @@
             // Non-seamless validation
             if (document.getElementById('ns_phone')) {
                 document.getElementById('ns_phone').addEventListener('input', function() {
-                    validatePhone('payuhosted');
+                    validatePhone('nonseamless');
                 });
                 document.getElementById('ns_email').addEventListener('blur', function() {
-                    validateEmail('payuhosted');
+                    validateEmail('nonseamless');
                 });
             }
             
@@ -5512,6 +5646,192 @@
         }
         
         // Navigation Functions
+        function loadSelectedFlow() {
+            const flowSelect = document.getElementById('flowSelect');
+            const selectedFlow = flowSelect.value;
+            
+            if (!selectedFlow) {
+                alert('Please select a payment flow');
+                return;
+            }
+            
+            // If switching from a different flow, reset the new flow's fields
+            if (currentFlow && currentFlow !== selectedFlow) {
+                resetFormFields(selectedFlow);
+                
+                // Reset UDF fields for the new flow
+                if (selectedFlow === 'nonseamless') {
+                    document.getElementById('ns_udf1').value = '';
+                    document.getElementById('ns_udf2').value = '';
+                    document.getElementById('ns_udf3').value = '';
+                    document.getElementById('ns_udf4').value = '';
+                    document.getElementById('ns_udf5').value = '';
+                } else if (selectedFlow === 'crossborder') {
+                    // Reset to one-time by default
+                    currentPaymentType = 'onetime';
+                    document.getElementById('cb-onetime-btn').classList.add('active');
+                    document.getElementById('cb-subscription-btn').classList.remove('active');
+                    document.getElementById('cb-subscription-config').classList.remove('active');
+                    document.getElementById('cb-onetime-udf-section').classList.remove('hidden');
+                    document.getElementById('cb-subscription-udf-section').classList.add('hidden');
+                    
+                    // Hide eNACH amount note for one-time payment
+                    const enachNote = document.getElementById('cb_enach_amount_note');
+                    if (enachNote) enachNote.style.display = 'none';
+                    
+                    // Reset one-time UDF fields
+                    document.getElementById('cb_udf1_input').value = '';
+                    document.getElementById('cb_udf2_input').value = '';
+                    document.getElementById('cb_udf3_input').value = '';
+                    document.getElementById('cb_udf4_input').value = '';
+                    document.getElementById('cb_udf5_input').value = '';
+                    
+                    // Initialize subscription fields with default values (current date and interval=1)
+                    const today = new Date().toISOString().split('T')[0];
+                    document.getElementById('cb_billing_cycle').value = 'MONTHLY';
+                    document.getElementById('cb_billing_interval').value = '1';
+                    document.getElementById('cb_payment_start_date').value = today;
+                    document.getElementById('cb_payment_end_date').value = '';
+                    
+                    // Initialize SI and API version (prefilled fields for subscription)
+                    document.getElementById('cb_si').value = '1';
+                    document.getElementById('cb_api_version').value = '7';
+                    
+                    console.log('Cross Border flow loaded - subscription fields initialized with defaults');
+                    
+                    // Reset subscription UDF fields
+                    document.getElementById('cb_sub_udf1_input').value = '';
+                    document.getElementById('cb_sub_udf2_input').value = '';
+                    document.getElementById('cb_sub_udf3_input').value = '';
+                    document.getElementById('cb_sub_udf4_input').value = '';
+                    document.getElementById('cb_sub_udf5_input').value = '';
+                } else if (selectedFlow === 'subscription') {
+                    // Reset subscription fields
+                    document.getElementById('sub_billing_cycle').value = 'MONTHLY';
+                    document.getElementById('sub_billing_interval').value = '1';
+                    document.getElementById('sub_payment_start_date').value = new Date().toISOString().split('T')[0];
+                    document.getElementById('sub_payment_end_date').value = '';
+                    
+                    document.getElementById('sub_udf1').value = '';
+                    document.getElementById('sub_udf2').value = '';
+                    document.getElementById('sub_udf3').value = '';
+                    document.getElementById('sub_udf4').value = '';
+                    document.getElementById('sub_udf5').value = '';
+                } else if (selectedFlow === 'tpv') {
+                    // Reset TPV UDF fields
+                    document.getElementById('tpv_udf1').value = '';
+                    document.getElementById('tpv_udf2').value = '';
+                    document.getElementById('tpv_udf3').value = '';
+                    document.getElementById('tpv_udf4').value = '';
+                    document.getElementById('tpv_udf5').value = '';
+                } else if (selectedFlow === 'upiotm') {
+                    // Reset UPI OTM date fields and UDFs
+                    const today = new Date().toISOString().split('T')[0];
+                    const endDate = new Date();
+                    endDate.setDate(endDate.getDate() + 7);
+                    document.getElementById('upi_payment_start_date').value = today;
+                    document.getElementById('upi_payment_end_date').value = endDate.toISOString().split('T')[0];
+                    
+                    document.getElementById('upi_udf1').value = '';
+                    document.getElementById('upi_udf2').value = '';
+                    document.getElementById('upi_udf3').value = '';
+                    document.getElementById('upi_udf4').value = '';
+                    document.getElementById('upi_udf5').value = '';
+                } else if (selectedFlow === 'preauth') {
+                    // Reset PreAuth UDF fields
+                    document.getElementById('preauth_udf1').value = '';
+                    document.getElementById('preauth_udf2').value = '';
+                    document.getElementById('preauth_udf3').value = '';
+                    document.getElementById('preauth_udf4').value = '';
+                    document.getElementById('preauth_udf5').value = '';
+                } else if (selectedFlow === 'checkoutplus') {
+                    // Reset Checkout Plus UDF fields
+                    document.getElementById('cp_udf1').value = '';
+                    document.getElementById('cp_udf2').value = '';
+                    document.getElementById('cp_udf3').value = '';
+                    document.getElementById('cp_udf4').value = '';
+                    document.getElementById('cp_udf5').value = '';
+                } else if (selectedFlow === 'bankoffer') {
+                    // Reset Bank Offer UDF fields
+                    document.getElementById('bo_udf1').value = '';
+                    document.getElementById('bo_udf2').value = '';
+                    document.getElementById('bo_udf3').value = '';
+                    document.getElementById('bo_udf4').value = '';
+                    document.getElementById('bo_udf5').value = '';
+                    // Reset offer_key
+                    document.getElementById('bo_offer_key').value = '';
+                    // Reset SKU configuration
+                    document.getElementById('bo_enable_sku').checked = false;
+                    document.getElementById('bo-sku-config').style.display = 'none';
+                    document.getElementById('bo-custom-sku-builder').style.display = 'none';
+                    document.getElementById('boSkuRowsContainer').innerHTML = '';
+                    boSkuRowCounter = 0;
+                    // Uncheck all scenario radios
+                    const scenarioRadios = document.querySelectorAll('input[name="bo_sku_scenario"]');
+                    scenarioRadios.forEach(radio => radio.checked = false);
+                    // Clear JSON preview
+                    document.getElementById('bo-json-preview').textContent = '';
+                }
+            }
+            
+            currentFlow = selectedFlow;
+            
+            // Hide landing section
+            document.getElementById('landingSection').style.display = 'none';
+            
+            // Show selected flow
+            document.getElementById(selectedFlow + 'Flow').classList.add('active');
+            
+            // Transaction ID already generated on page load - keeping it stable
+            console.log('✓ Using stable transaction ID for ' + selectedFlow + ' flow');
+            
+            // Initialize split flow with a default row
+            if (selectedFlow === 'split') {
+                // Clear any existing rows
+                document.getElementById('splitRowsContainer').innerHTML = '';
+                splitRowCounter = 0;
+                // Add one default split row
+                addSplitRow();
+                console.log('✓ Split flow initialized with default row');
+            }
+            
+            // Save current flow to localStorage for persistence on refresh
+            localStorage.setItem('currentPaymentFlow', selectedFlow);
+            if (selectedFlow === 'crossborder') {
+                localStorage.setItem('currentPaymentType', currentPaymentType);
+            }
+            console.log('✓ Flow saved to localStorage:', selectedFlow);
+        }
+        
+        function backToLanding() {
+            // Hide all flow sections
+            document.querySelectorAll('.flow-content').forEach(function(section) {
+                section.classList.remove('active');
+            });
+            
+            // Show landing section
+            document.getElementById('landingSection').style.display = 'block';
+            
+            // Reset flow selector
+            document.getElementById('flowSelect').value = '';
+            currentFlow = '';
+            
+            // Hide debug sections
+            hideDebugAndCurl('crossborder');
+            hideDebugAndCurl('nonseamless');
+            hideDebugAndCurl('subscription');
+            hideDebugAndCurl('tpv');
+            hideDebugAndCurl('upiotm');
+            hideDebugAndCurl('preauth');
+            hideDebugAndCurl('checkoutplus');
+            hideDebugAndCurl('split');
+            hideDebugAndCurl('bankoffer');
+            
+            // Clear localStorage when going back to flow selection
+            localStorage.removeItem('currentPaymentFlow');
+            localStorage.removeItem('currentPaymentType');
+            console.log('✓ localStorage cleared - returned to landing page');
+        }
         
         // Transaction ID Generation
         function generateTransactionId(flow) {
@@ -5992,6 +6312,10 @@
                 onetimeUdfSection.classList.add('hidden');
                 subscriptionUdfSection.classList.remove('hidden');
                 
+                // Show eNACH amount note for subscription
+                const enachNote = document.getElementById('cb_enach_amount_note');
+                if (enachNote) enachNote.style.display = 'block';
+                
                 // SI and API Version are already set in HTML with readonly values - no need to set again
                 // They have value="1" and value="7" hardcoded
                 
@@ -6023,6 +6347,10 @@
                 subscriptionConfig.classList.remove('active');
                 onetimeUdfSection.classList.remove('hidden');
                 subscriptionUdfSection.classList.add('hidden');
+                
+                // Hide eNACH amount note for one-time payment
+                const enachNote = document.getElementById('cb_enach_amount_note');
+                if (enachNote) enachNote.style.display = 'none';
                 
                 // Keep SI and API version values - they're readonly and prefilled in HTML
                 // Only clear the si_details as it's user-configurable
@@ -7319,7 +7647,7 @@
             
             // Update modal title
             const flowNames = {
-                'payuhosted': 'PayU Hosted Checkout',
+                'nonseamless': 'Non-Seamless',
                 'crossborder': 'Cross Border',
                 'subscription': 'Subscription',
                 'tpv': 'TPV',
@@ -7364,7 +7692,7 @@
         function extractFlowParameters(flow) {
             console.log('[DEBUG] extractFlowParameters called for flow:', flow);
             
-            const prefix = flow === 'payuhosted' ? 'ns' : 
+            const prefix = flow === 'nonseamless' ? 'ns' : 
                           (flow === 'crossborder' ? 'cb' : 
                           (flow === 'subscription' ? 'sub' : 
                           (flow === 'tpv' ? 'tpv' :
@@ -9808,5 +10136,3 @@ nodeCartDetailsUsage +
     </div>
 </body>
 </html>
-
-
